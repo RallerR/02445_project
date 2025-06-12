@@ -1,0 +1,4 @@
+Age,Mean_Overall_ChatGPT - 4o,Mean_Overall_Claude - Sonnet 4,Mean_Overall_Copilot,Std_Overall_ChatGPT - 4o,Std_Overall_Claude - Sonnet 4,Std_Overall_Copilot
+8,4.58,4.5,4.64,0.08,0.14,0.05
+30,4.56,4.72,4.67,0.17,0.13,0.0
+70,4.5,4.47,4.58,0.3,0.21,0.33

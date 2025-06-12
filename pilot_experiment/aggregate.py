@@ -20,19 +20,24 @@ grouped = df.groupby(['Model', 'Concept', 'Age']).agg(
 grouped['Overall_Mean'] = grouped[['Vocabulary_Mean', 'Tone_Mean', 'Analogy_Mean', 'Clarity_Mean']].mean(axis=1)
 grouped['Overall_Std'] = grouped[['Vocabulary_Std', 'Tone_Std', 'Analogy_Std', 'Clarity_Std']].mean(axis=1)
 
-# Save or view the result
+# Save to CSV if needed
 grouped.to_csv("Aggregated_Evaluation.csv", index=False)
 
-# Load the aggregated evaluation data
-df = pd.read_csv("Aggregated_Evaluation.csv")
+# Now create a summary table with both Mean and Std of the Overall scores per Model × Age
+summary = grouped.groupby(['Model', 'Age']).agg(
+    Mean_Overall=('Overall_Mean', 'mean'),
+    Std_Overall=('Overall_Mean', 'std')
+).reset_index()
 
-# Pivot table to compute mean Overall_Mean for each Model × Age
-table = df.pivot_table(
-    index='Age',
-    columns='Model',
-    values='Overall_Mean',
-    aggfunc='mean'
-).round(2)
+# Pivot table to show both stats side-by-side
+summary_table = summary.pivot(index='Age', columns='Model')
 
-# Print the table
-print(table)
+# Clean up column names for readability
+summary_table.columns = ['_'.join(col).strip() for col in summary_table.columns.values]
+
+# Round values for clarity
+summary_table = summary_table.round(2)
+
+# Print or save
+print(summary_table)
+summary_table.to_csv("Overall_Stats_By_Model_Age.csv")
