@@ -7,7 +7,7 @@ import re
 USER_ID = "user1"
 
 INPUT_FILE = "All_Model_Responses.csv"
-OUTPUT_FILE = "Data_Evaluated.csv"
+OUTPUT_FILE = f"evaluations_{USER_ID}.csv"
 
 def clean_markdown(text):
     text = re.sub(r"(\*\*|\*|_)(.*?)\1", r"\2", text)  # remove markdown
@@ -41,8 +41,16 @@ df = pd.read_csv(INPUT_FILE)
 
 if os.path.exists(OUTPUT_FILE) and os.path.getsize(OUTPUT_FILE) > 0:
     evaluated_df = pd.read_csv(OUTPUT_FILE)
-    if {"Prompt", "Repeat", "User"}.issubset(evaluated_df.columns):
-        evaluated_keys = set(zip(evaluated_df["Prompt"], evaluated_df["Repeat"], evaluated_df["User"]))
+    if {"Prompt", "Age", "Repeat", "Model", "User"}.issubset(evaluated_df.columns):
+        evaluated_keys = set(
+            zip(
+                evaluated_df["Prompt"],
+                evaluated_df["Age"],
+                evaluated_df["Repeat"],
+                evaluated_df["Model"],
+                evaluated_df["User"]
+            )
+        )
     else:
         print("Existing file is missing expected columns. Starting fresh.")
         evaluated_df = pd.DataFrame()
@@ -54,7 +62,7 @@ else:
 # Filter out already evaluated samples for this user
 to_evaluate = [
     row for _, row in df.iterrows()
-    if (row["Prompt"], row["Repeat"], USER_ID) not in evaluated_keys
+    if (row["Prompt"], row["Age"], row["Repeat"], row["Model"], USER_ID) not in evaluated_keys
 ]
 
 random.shuffle(to_evaluate)
