@@ -51,7 +51,7 @@ for i in range(0, len(prompts), batch_size):
                 contents=prompt_text,
                 config=types.GenerateContentConfig(
                     temperature=temperature,
-                    # max_output_tokens=512
+                    max_output_tokens=1024
                 )
             )
             text = response.text
