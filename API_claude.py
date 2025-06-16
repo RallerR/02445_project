@@ -9,7 +9,7 @@ client = anthropic.Anthropic(api_key="sk-ant-api03-XOHPp_mRbGJgsJkF-LQDPiFbTqRS_
 # Parameters (same as your ChatGPT setup)
 ages = [10, 25, 50]
 n_repeats = 1
-model = "claude-3-7-sonnet-20250219"  # choose the Claude version you want
+model = "claude-3-7-sonnet-20250219"
 temperature = 0.7
 batch_size = 10
 topics_csv_file = "topics_list.csv"

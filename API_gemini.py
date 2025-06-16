@@ -10,7 +10,7 @@ client = genai.Client(api_key="AIzaSyDCeM6kxTF5fX9pK93NieaTNpF7wkIWOjE")
 # Parameters
 ages = [10, 25, 50]
 n_repeats = 1
-model_name = "models/gemini-1.5-flash"
+model_name = "models/gemini-2.0-flash"
 temperature = 0.7
 batch_size = 10
 topics_csv_file = "topics_list.csv"
