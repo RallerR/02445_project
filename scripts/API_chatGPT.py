@@ -4,16 +4,20 @@ import time
 import os
 
 # API key
-client = openai.OpenAI(api_key="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")
+client = openai.OpenAI(api_key="")
 
 # Parameters
-ages = [10,  25, 50]
+ages = [10]
 n_repeats = 1
 model = "gpt-4o"
 temperature = 0.7
 batch_size = 10
-topics_csv_file = "topics_list.csv"
-output_file = "Generated_Responses_ChatGPT.csv"
+
+# Construct paths relative to this script
+base_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.join(base_dir, "..", "data")
+topics_csv_file = os.path.join(data_dir, "topics_list.csv")
+output_file = os.path.join(data_dir, "Generated_Responses_ChatGPT.csv")
 
 # Load topics from list
 topic_df = pd.read_csv(topics_csv_file)
@@ -25,7 +29,7 @@ for topic in topics:
     for age in ages:
         for r in range(n_repeats):
             prompt = f"I am {age} years old. Can you explain {topic} to me?"
-            prompts.append((age, topic, r+1, prompt))
+            prompts.append((age, topic, r + 1, prompt))
 
 # Load previous responses
 if os.path.exists(output_file):
@@ -39,7 +43,7 @@ else:
 # Collect responses
 results = []
 for i in range(0, len(prompts), batch_size):
-    batch = prompts[i:i+batch_size]
+    batch = prompts[i:i + batch_size]
     for age, topic, repeat, prompt in batch:
         if prompt in completed_prompts:
             continue
@@ -58,7 +62,7 @@ for i in range(0, len(prompts), batch_size):
                 "Prompt": prompt,
                 "Response": text
             })
-            print(f"✓ Done: {prompt[:40]}...")
+            print(f"Done: {prompt[:40]}...")
             time.sleep(1.2)
         except Exception as e:
             print(f"Error for: {prompt[:40]} → {e}")

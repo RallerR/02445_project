@@ -5,16 +5,20 @@ from google import genai
 from google.genai import types
 
 # Configure API key
-client = genai.Client(api_key="AIzaSyDCeM6kxTF5fX9pK93NieaTNpF7wkIWOjE")
+client = genai.Client(api_key="")
 
 # Parameters
-ages = [10, 25, 50]
+ages = [10]
 n_repeats = 1
 model_name = "models/gemini-2.0-flash"
 temperature = 0.7
 batch_size = 10
-topics_csv_file = "topics_list.csv"
-output_file = "Generated_Responses_Gemini.csv"
+
+# Paths
+base_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.join(base_dir, "..", "data")
+topics_csv_file = os.path.join(data_dir, "topics_list.csv")
+output_file = os.path.join(data_dir, "Generated_Responses_Gemini.csv")
 
 # Load topics
 topic_df = pd.read_csv(topics_csv_file)
@@ -47,7 +51,7 @@ for i in range(0, len(prompts), batch_size):
             continue
         try:
             response = client.models.generate_content(
-                model="models/gemini-1.5-flash",
+                model=model_name,
                 contents=prompt_text,
                 config=types.GenerateContentConfig(
                     temperature=temperature,
@@ -64,7 +68,7 @@ for i in range(0, len(prompts), batch_size):
                 "Prompt": prompt_text,
                 "Response": text
             })
-            print(f"✓ Gemini done: {prompt_text[:40]} (r{repeat})")
+            print(f"Gemini done: {prompt_text[:40]} (r{repeat})")
             time.sleep(1)
         except Exception as e:
             print(f"Error: {e}")

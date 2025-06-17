@@ -1,0 +1,5 @@
+,sum_sq,eta_sq,partial_eta_sq
+C(Model),0.0726,0.0024,0.0024
+C(Age),0.2164,0.007,0.0071
+C(Model):C(Age),0.2542,0.0082,0.0083
+Residual,30.3416,0.9824,0.5

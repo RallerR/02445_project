@@ -6,8 +6,11 @@ import re
 # Set the evaluator's ID
 USER_ID = "user1"
 
-INPUT_FILE = "All_Model_Responses.csv"
-OUTPUT_FILE = f"evaluations_{USER_ID}.csv"
+# Paths
+base_dir = os.path.dirname(os.path.abspath(__file__))
+data_dir = os.path.join(base_dir, "..", "data")
+INPUT_FILE = os.path.join(data_dir, "All_Model_Responses.csv")
+OUTPUT_FILE = os.path.join(data_dir, f"evaluations_{USER_ID}.csv")
 
 def clean_markdown(text):
     text = re.sub(r"(\*\*|\*|_)(.*?)\1", r"\2", text)  # remove markdown
