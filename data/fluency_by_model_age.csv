@@ -1,0 +1,10 @@
+Model,Age,mean,std
+claude-3-7-sonnet-20250219,10,4.67,0.22
+claude-3-7-sonnet-20250219,25,4.63,0.24
+claude-3-7-sonnet-20250219,50,4.58,0.24
+gpt-4o,10,4.63,0.23
+gpt-4o,25,4.67,0.19
+gpt-4o,50,4.65,0.25
+models/gemini-2.0-flash,10,4.7,0.22
+models/gemini-2.0-flash,25,4.64,0.24
+models/gemini-2.0-flash,50,4.62,0.25

@@ -8,7 +8,7 @@ from google.genai import types
 client = genai.Client(api_key="")
 
 # Parameters
-ages = [10]
+ages = [10, 25, 50]
 n_repeats = 1
 model_name = "models/gemini-2.0-flash"
 temperature = 0.7

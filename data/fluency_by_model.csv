@@ -1,0 +1,4 @@
+Model,mean,std
+claude-3-7-sonnet-20250219,4.63,0.23
+gpt-4o,4.65,0.22
+models/gemini-2.0-flash,4.65,0.24

@@ -7,7 +7,7 @@ import os
 client = openai.OpenAI(api_key="")
 
 # Parameters
-ages = [10]
+ages = [10, 25, 50]
 n_repeats = 1
 model = "gpt-4o"
 temperature = 0.7
